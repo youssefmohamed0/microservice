@@ -22,7 +22,12 @@ public class RatingsResource {
     
     @RequestMapping("/{userId}")
     public UserRating getRatingsOfUser(@PathVariable String userId) {
-        List<Rating> ratings = ratingRepository.findByUserId(userId);
+        // List<Rating> ratings = ratingRepository.findByUserId(userId);
+
+        // return new UserRating(ratings);
+        List<Rating> ratings = Arrays.asList(
+                new Rating("550", 4)
+        );
 
         return new UserRating(ratings);
     }

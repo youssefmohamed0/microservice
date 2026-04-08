@@ -27,6 +27,11 @@ public class Rating {
     public Rating() {
     }
 
+    public Rating(String movieId, int rating) {
+        this.movieId = movieId;
+        this.rating = rating;
+    }
+
     public Rating(String userId, String movieId, int rating) {
         this.userId = userId;
         this.movieId = movieId;
