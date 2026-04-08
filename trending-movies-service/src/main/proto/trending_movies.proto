@@ -1,0 +1,33 @@
+// 1. We are using the newest version of the Protobuf language
+syntax = "proto3";
+
+// 2. Tell the compiler where to put the generated Java files
+option java_multiple_files = true;
+option java_package = "com.example.trendingmoviesservice.grpc";
+option java_outer_classname = "TrendingMoviesProto";
+
+package trending;
+
+// 3. Define the actual Service
+service TrendingMoviesService {
+  // This is the method the Catalog Service will call
+  rpc GetTopTrendingMovies (TrendingRequest) returns (TrendingResponse);
+}
+
+// 4. Define the Request
+// We don't actually need to send any data in the request (like a userId) 
+// because we just want the top 10 overall, but gRPC requires a message type.
+message TrendingRequest {
+}
+
+// 5. Define what a single Movie looks like in this context
+message TrendingMovie {
+  string movie_id = 1;
+  int32 average_rating = 2;
+}
+
+// 6. Define the Response
+// The 'repeated' keyword means this will be a List/Array of TrendingMovie objects
+message TrendingResponse {
+  repeated TrendingMovie movies = 1;
+}
