@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  # --- DATABASE SERVICES ---
+  ratings-mysql:
+    image: mysql:8.0
+    container_name: ratings-mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password                      # Root password for MySQL
+      MYSQL_DATABASE: movie_ratings_db
+      MYSQL_USER: ratings_service_user                 # Creates a dedicated user
+      MYSQL_PASSWORD: rating_service_password          # Password for the dedicated user
+    ports:
+      - "3306:3306"
+    volumes:
+      # This maps the local SQL file into the container's special startup folder
+      - ./db-init/mysql/init_database.sql.gz:/docker-entrypoint-initdb.d/init_database.sql.gz
