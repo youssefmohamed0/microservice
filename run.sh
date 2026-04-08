@@ -6,16 +6,36 @@ run_service() {
     (cd "$1" && mvn spring-boot:run) &
 }
 
-# 1. Start Discovery Server first (Infrastructure)
+# Start the MySQL Docker container first
+echo "Starting MySQL Container..."
+docker compose up -d
+
+until docker exec ratings-mysql-db mysqladmin ping -h localhost --silent; do
+    echo "   ...MySQL is still unzipping the SQL file or starting up..."
+    sleep 3
+done
+echo "✅ MySQL is up!"
+
+# Start Discovery Server (Infrastructure)
 run_service "discovery-server"
 
 # Wait a few seconds for Eureka to initialize
+echo "Waiting for infrastructure to initialize..."
 sleep 10
 
-# 2. Start the other services
+# Start the other services
 run_service "movie-info-service"
 run_service "ratings-data-service"
+run_service "trending-movies-service"
+
+sleep 10
+
 run_service "movie-catalog-service"
 
-echo "All services are starting. Check http://localhost:8761 for status."
+echo "-----------------------------------------------------------------"
+echo "-----------------------------------------------------------------"
+echo "-----------------------------------------------------------------"
+echo "-----------------------------------------------------------------"
+echo "-----------------------------------------------------------------"
+echo "All services are running. Check http://localhost:8761 for status."
 wait

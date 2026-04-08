@@ -11,7 +11,7 @@ services:
       MYSQL_USER: ratings_service_user                 # Creates a dedicated user
       MYSQL_PASSWORD: rating_service_password          # Password for the dedicated user
     ports:
-      - "3307:3307"
+      - "3307:3306"
     volumes:
       # This maps the local SQL file into the container's special startup folder
       - ./db-init/mysql/init_database.sql.gz:/docker-entrypoint-initdb.d/init_database.sql.gz
