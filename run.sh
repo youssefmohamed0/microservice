@@ -3,7 +3,7 @@
 # Function to run a service in the background
 run_service() {
     echo "Starting $1..."
-    (cd "$1" && mvn spring-boot:run) &
+    (cd "$1" && mvn -e spring-boot:run) &
 }
 
 # Start the MySQL Docker container first
