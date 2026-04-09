@@ -17,6 +17,7 @@ services:
     volumes:
       # This maps the local SQL file into the container's special startup folder
       - ./db-init/mysql/init_database.sql.gz:/docker-entrypoint-initdb.d/init_database.sql.gz
+      # - ./db-init/init_database.sql:/docker-entrypoint-initdb.d/init_database.sql
 
   movie-mongodb:
     image: mongo:latest
