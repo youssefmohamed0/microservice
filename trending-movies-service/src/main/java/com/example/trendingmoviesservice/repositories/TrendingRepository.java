@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TrendingRepository extends JpaRepository<Rating, Integer> {
+public interface TrendingRepository extends JpaRepository<Rating, Long> {
 
     // @Query lets us write raw, native SQL exactly as you designed it!
     @Query(value = "SELECT movie_id AS movieId, AVG(rating) AS rating FROM user_ratings GROUP BY movie_id ORDER BY rating DESC LIMIT 10", nativeQuery = true)
